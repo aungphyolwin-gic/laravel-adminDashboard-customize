@@ -18,10 +18,10 @@ class CreateItemsTable extends Migration
             $table->string('name');
             $table->double('price');
             $table->integer('amount');
-            $table->string('category_type');
+            $table->unsignedBigInteger('category_id');
             $table->date('expiredDate')->nullable();
             $table->timestamps();
-            $table->foreign('category_type')->references('name')->on('categories');
+            $table->foreign('category_id')->references('id')->on('categories');
         });
     }
 

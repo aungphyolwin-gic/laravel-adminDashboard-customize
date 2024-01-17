@@ -17,7 +17,7 @@ class ItemController extends Controller
     public function index()
     {
         $items =Item::all();
-        return $items;
+        // return $items;
         return view('item.index',compact('items'));
 
     }
@@ -30,7 +30,7 @@ class ItemController extends Controller
     public function create()
     {
         $categories = Category::all();
-        return $categories;
+        // return $categories;
         return view('item.create', compact('categories'));
     }
 
@@ -42,12 +42,12 @@ class ItemController extends Controller
      */
     public function store(StoreItemRequest $request)
     {
-        return $request;
+        // return $request;
         $item = new Item();
         $item->name = $request->name;
         $item->price = $request->price;
         $item->amount = $request->amount;
-        $item->category_type = $request->category_type;
+        $item->category_id = $request->category_id;
         $item->expiredDate = $request->expiredDate;
         $item->save();
         return redirect()->route('item.index')->with('create', 'An item data created successfully.');
@@ -61,6 +61,7 @@ class ItemController extends Controller
      */
     public function show(Item $item)
     {
+        return $item;
         return view('item.show',compact('item'));
     }
 
@@ -72,8 +73,9 @@ class ItemController extends Controller
      */
     public function edit(Item $item)
     {
-        return $item;
-        return view('item.edit',compact('item'));
+        // return $item;
+        $categories = Category::all();
+        return view('item.edit',compact('item','categories'));
     }
 
     /**
@@ -85,11 +87,11 @@ class ItemController extends Controller
      */
     public function update(UpdateItemRequest $request, Item $item)
     {
-        return $request;
+        // return $request;
         $item->name = $request->name;
         $item->price = $request->price;
         $item->amount = $request->amount;
-        $item->category_type = $request->category_type;
+        $item->category_id = $request->category_id;
         $item->expiredDate = $request->expiredDate;
         $item->update();
         return redirect()->route('item.index')->with('update', 'The item data updated successfully.');

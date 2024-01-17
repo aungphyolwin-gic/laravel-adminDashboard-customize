@@ -13,7 +13,7 @@ class UpdateItemRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,11 +24,11 @@ class UpdateItemRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'=>'filled',
+            'name'=>'filled|unique:items,name,'.$this->route('item')->id,
             'price'=>'filled',
             'amount'=>'filled',
-            'category_type'=>'filled|unique:categories,name',
-            'expiredDate'=>'filled|date|nullable'
+            'category_id'=>'filled',
+            'expiredDate'=>'date|nullable'
         ];
     }
 }

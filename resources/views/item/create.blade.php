@@ -5,12 +5,12 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card  mt-3 shadow">
-                <div class="card-header bg-gray text-center">
+                <div class="card-header bg-gray text-left">
                     <h3>Item Category</h3>
                 </div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('category.store') }}">
+                    <form method="POST" action="{{ route('item.store') }}">
                         @csrf
 
                         <div class="form-group m-3 row">
@@ -24,20 +24,58 @@
                           </div>
 
                           <div class="form-group m-3 row">
-                            <label for="name" class="col-sm-6 col-form-label">Category Type <small class="text-danger">*</small></label>
+                            <label for="price" class="col-sm-6 col-form-label">Price <small class="text-danger">*</small></label>
                             <div class="col-sm-6">
-                              <input type="name" name="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}">
-                              @error('name')
+                              <input type="number" name="price" class="form-control @error('price') is-invalid @enderror" value="{{ old('price') }}">
+                              @error('price')
                                 <div class="text-danger">{{ $message }}</div>
                               @enderror
                             </div>
                           </div>
 
+                          <div class="form-group m-3 row">
+                            <label for="amount" class="col-sm-6 col-form-label">Available Amount <small class="text-danger">*</small></label>
+                            <div class="col-sm-6">
+                              <input type="number" name="amount" class="form-control @error('amount') is-invalid @enderror" value="{{ old('amount') }}">
+                              @error('amount')
+                                <div class="text-danger">{{ $message }}</div>
+                              @enderror
+                            </div>
+                          </div>
 
+                          <div class="form-group m-3 row">
+                            <label for="category_id" class="col-sm-6 col-form-label">Category Type <small class="text-danger">*</small></label>
+                            <div class="col-sm-6 dropdown">
+                                <select name="category_id" class="form-control @error('category_id') is-invalid @enderror" >
+                                    <option value="" @selected(true)>Category Types</option>
+
+                                    @if (! $categories->isEmpty())
+                                    @foreach ($categories as $category)
+                                        <option value="{{ old('category_id')?? $category->id }}"> {{ $category->name }} </option>
+                                    @endforeach
+                                    @else
+                                        <option class="text-danger" disabled >No category available</option>
+                                    @endif
+                                </select>
+                                @error('category_id')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                          </div>
+
+                          <div class="form-group m-3 row">
+                            <label for="expiredDate" class="col-sm-6 col-form-label">Expired Date </label>
+                            <div class="col-sm-6">
+                              <input type="date" name="expiredDate" class="form-control @error('expiredDate') is-invalid @enderror" value="{{ old('expiredDate') }}">
+                              @error('expiredDate')
+                                <div class="text-danger">{{ $message }}</div>
+                              @enderror
+                            </div>
+                          </div>
 
                           <div class="form-group m-3 row">
                             <div class="mx-auto">
-                              <a href="{{ route('category.index') }}" class="btn btn-outline-dark">
+                              <a href="{{ route('item.index') }}" class="btn btn-outline-dark">
                                 <i class="far fa-arrow-alt-circle-left fa-lg"></i>
                               </a>
                               <button type="submit" class="btn btn-outline-primary">Add</button>

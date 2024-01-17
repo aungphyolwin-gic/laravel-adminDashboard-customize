@@ -2,9 +2,9 @@
 
 @section('content')
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card  mt-3 shadow">
+    <div class="row justify-content-left">
+        <div class="col-md-8 d-flex">
+            <div class="card  mt-3 ml-3 shadow align-item-center">
                 <div class="card-header bg-gray text-center">
                     <h3>Create Category</h3>
                 </div>

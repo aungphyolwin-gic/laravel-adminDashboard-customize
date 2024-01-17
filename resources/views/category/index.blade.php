@@ -61,13 +61,17 @@
                                     <td>
                                         <div class="d-inline">
                                             <a href="{{ route('category.edit',$category->id) }}" class="btn btn-outline-warning "><i class="fa fa-pen"></i></a>
-                                            <a href="{{ route('category.show',$category->id) }}" class="btn btn-outline-info "><i class="fa fa-info"></i></a>
+                                            {{-- <a href="{{ route('category.show',$category->id) }}" class="btn btn-outline-info "><i class="fa fa-info"></i></a> --}}
                                         </div>
 
                                         <form action="{{ route('category.destroy',$category->id) }}" method="POST" class="d-inline">
                                             @csrf
                                             @method('DELETE')
-                                            <button class="btn btn-outline-danger"><i class="fa fa-trash"></i></button>
+                                            <button class="btn btn-outline-danger"
+                                            @foreach ($items as $item)
+                                                {{ ($category->id == $item->category_id)? "disabled":"" }}
+                                            @endforeach
+                                            ><i class="fa fa-trash"></i></button>
                                         </form>
                                     </td>
                                   </tr>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Item ;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 
@@ -19,7 +20,8 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::all();
-        return view('category.index',compact('categories'));
+        $items = Item::all();
+        return view('category.index',compact('categories','items'));
     }
 
     /**
