@@ -43,13 +43,23 @@ class ItemController extends Controller
     public function store(StoreItemRequest $request)
     {
         // return $request;
+        $imgName = "default";
+        if($request->hasFile('image')){
+            $imgName = "gallery_".uniqid().'.'.$request->image->extension();
+            $imageFile =  $request->image;
+            $imageFile->storeAs('public/gallery',$imgName);
+        }
+        // return $imgName;
         $item = new Item();
         $item->name = $request->name;
         $item->price = $request->price;
         $item->amount = $request->amount;
         $item->category_id = $request->category_id;
         $item->expiredDate = $request->expiredDate;
+        $item->image = $imgName;
         $item->save();
+
+
         return redirect()->route('item.index')->with('create', 'An item data created successfully.');
     }
 
@@ -88,6 +98,20 @@ class ItemController extends Controller
     public function update(UpdateItemRequest $request, Item $item)
     {
         // return $request;
+        if($request->hasFile('image')){
+            $updateImg = $request->image;
+            $imageName = "gallery_".uniqid().'.'.$updateImg->extension();
+            // return $imageName;
+            $updateImg->storeAs('public/gallery',$imageName);
+
+            $item->name = $request->name;
+            $item->price = $request->price;
+            $item->amount = $request->amount;
+            $item->category_id = $request->category_id;
+            $item->expiredDate = $request->expiredDate;
+            $item->image = $imageName;
+            $item->update();
+        }
         $item->name = $request->name;
         $item->price = $request->price;
         $item->amount = $request->amount;

@@ -3,7 +3,7 @@
 @section('content')
 <div class="container ">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-10">
             <div class="card mt-3 shadow">
                 <div class="card-header bg-gray text-center">
                     <h3 class="fst-italic">Item List</h3>
@@ -50,6 +50,7 @@
                                 <th scope="col">Amount</th>
                                 <th scope="col">Category Type</th>
                                 <th scope="col">Expired Date</th>
+                                <th scope="col">Image</th>
                                 <th scope="col">Action</th>
                               </tr>
                             </thead>
@@ -65,6 +66,7 @@
                                     <td >{{ $item->amount }}</td>
                                     <td >{{ $item->category->name }}</td>
                                     <td >{{ $item->expiredDate }}</td>
+                                    <td ><img src="{{ asset('storage/gallery/'.$item->image) }}"  width="50px" alt="item"></td>
 
                                     <td>
                                         <div class="d-inline">

@@ -10,7 +10,7 @@
                 </div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('item.update', $item->id) }}">
+                    <form method="POST" action="{{ route('item.update', $item->id) }}" enctype="multipart/form-data">
                         @csrf
                         @method("PUT")
                         <div class="form-group m-3 row">
@@ -48,7 +48,7 @@
                             <div class="col-sm-6 dropdown">
                                 <select name="category_id" class="form-control @error('category_id') is-invalid @enderror" >
                                     <p>hello</p>
-{{-- Category to be selected --}}
+{{-- Category to be selected bug--}}
                                     @if (! $categories->isEmpty())
                                     @foreach ($categories as $category)
                                         <option value="{{ old('category_id')?? $category->id }}" {{ ($item->category_id==$category->id)? "selected":"" }}> {{ $category->name }} </option>
@@ -73,6 +73,24 @@
                             </div>
                           </div>
 
+                          <div class="form-group row">
+                            <div class="col-sm-6"></div>
+                            <div class="col-sm-6 text-center product-image-thumb">
+                                <img src="{{ asset('storage/gallery/'.$item->image) }}"  width="60px" alt="item">
+                            </div>
+                          </div>
+                          <div class="form-group m-3 row">
+                            <label for="image" class="col-sm-6 col-form-label">Item Image </label>
+                            <div class="col-sm-6">
+                                <div class=" input-group-append">
+                                    <input type="file" name="image" class=" custom-file-input @error('image') is-invalid @enderror" value="{{ old('image') }}">
+                                    <label for="image" class=" custom-file-label">Choose File</label>
+                                </div>
+                              @error('image')
+                                <div class="text-danger">{{ $message }}</div>
+                              @enderror
+                            </div>
+                          </div>
 
                           <div class="form-group m-3 row  ">
                             <div class="mx-auto">

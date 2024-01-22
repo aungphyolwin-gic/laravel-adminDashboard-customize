@@ -10,9 +10,10 @@
                 </div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('item.store') }}">
+                    <form method="POST" action="{{ route('item.store') }}" enctype="multipart/form-data">
                         @csrf
 
+                        {{-- Item Name Field --}}
                         <div class="form-group m-3 row">
                             <label for="name" class="col-sm-6 col-form-label">Item Name <small class="text-danger">*</small></label>
                             <div class="col-sm-6">
@@ -23,6 +24,7 @@
                             </div>
                           </div>
 
+                          {{-- Item Price Field --}}
                           <div class="form-group m-3 row">
                             <label for="price" class="col-sm-6 col-form-label">Price <small class="text-danger">*</small></label>
                             <div class="col-sm-6">
@@ -33,6 +35,7 @@
                             </div>
                           </div>
 
+                          {{-- Item Amount Field --}}
                           <div class="form-group m-3 row">
                             <label for="amount" class="col-sm-6 col-form-label">Available Amount <small class="text-danger">*</small></label>
                             <div class="col-sm-6">
@@ -43,6 +46,7 @@
                             </div>
                           </div>
 
+                          {{-- Item Category Type Field --}}
                           <div class="form-group m-3 row">
                             <label for="category_id" class="col-sm-6 col-form-label">Category Type <small class="text-danger">*</small></label>
                             <div class="col-sm-6 dropdown">
@@ -63,11 +67,26 @@
                             </div>
                           </div>
 
+                          {{-- Item Exp Date Field --}}
                           <div class="form-group m-3 row">
                             <label for="expiredDate" class="col-sm-6 col-form-label">Expired Date </label>
                             <div class="col-sm-6">
                               <input type="date" name="expiredDate" class="form-control @error('expiredDate') is-invalid @enderror" value="{{ old('expiredDate') }}">
                               @error('expiredDate')
+                                <div class="text-danger">{{ $message }}</div>
+                              @enderror
+                            </div>
+                          </div>
+
+                          {{-- Item Image File Upload Filed --}}
+                          <div class="form-group m-3 row">
+                            <label for="image" class="col-sm-6 col-form-label">Item Image </label>
+                            <div class="col-sm-6">
+                                <div class=" input-group-append">
+                                    <input type="file" name="image" class=" custom-file-input @error('image') is-invalid @enderror" value="{{ old('image') }}">
+                                    <label for="image" class=" custom-file-label">Choose File</label>
+                                </div>
+                                @error('image')
                                 <div class="text-danger">{{ $message }}</div>
                               @enderror
                             </div>
