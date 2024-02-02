@@ -131,7 +131,8 @@ class ItemController extends Controller
     {
         if($item){
             $item->delete();
+            return redirect()->route('item.index')->with('delete', 'The item data deleted successfully.');
         }
-        return redirect()->route('item.index')->with('delete', 'The item data deleted successfully.');
+        return redirect()->route('item.index')->with('delete', 'The item data delete failed.');
     }
 }

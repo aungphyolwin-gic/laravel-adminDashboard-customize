@@ -40,7 +40,7 @@
                                 <th scope="col">Name</th>
                                 <th scope="col">Price</th>
                                 <th scope="col">Amount</th>
-                                <th scope="col"  class="text-left">Cost</th>
+                                <th scope="col">Cost</th>
                             </thead>
 
                             {{-- @foreach ($buyItems as $items)
